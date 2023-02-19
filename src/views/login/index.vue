@@ -25,6 +25,7 @@
 
 <script>
 import { loginAPI } from '@/api'
+import { mapMutations } from 'vuex'
 export default {
   name: 'my-login',
   data () {
@@ -46,6 +47,7 @@ export default {
     }
   },
   methods: {
+    ...mapMutations(['updateToken']),
     // 登录 -> 点击事件
     loginFn () {
       this.$refs.loginForm.validate(async valid => {
@@ -58,6 +60,8 @@ export default {
         if (res.code !== 0) return this.$message.error('请检查用户名或者密码是否正确！')
         // 3. 登录成功，提示用户
         this.$message.success('登录成功，正在跳转界面……')
+        // 提交给 mutations 把 token 保存到 vuex 中
+        this.updateToken(res.token)
         // 4. 进入后台管理系统
         this.$router.push('/home')
       })
