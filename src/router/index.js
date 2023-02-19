@@ -4,6 +4,10 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
 const routes = [
+  { // 重定向到登录界面
+    path: '/',
+    redirect: '/login'
+  },
   {
     path: '/reg',
     component: () => import('@/views/regitster')
@@ -15,6 +19,10 @@ const routes = [
   {
     path: '/login',
     component: () => import('@/views/login')
+  },
+  {
+    path: '/home',
+    component: () => import('@/views/home')
   }
 ]
 

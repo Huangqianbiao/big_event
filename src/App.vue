@@ -3,12 +3,12 @@
 </template>
 
 <script>
-import { registerAPI } from '@/api/channel'
+// import { registerAPI } from '@/api/channel'
 export default {
-  async created () {
-    const res = await registerAPI()
-    console.log(res)
-  }
+  // async created () {
+  //   const res = await registerAPI()
+  //   console.log(res)
+  // }
 }
 </script>
 
