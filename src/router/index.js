@@ -34,7 +34,8 @@ const router = new VueRouter({
 // 全局前置路由守卫
 router.beforeEach((to, from, next) => {
   const token = store.state.token
-  if (token) {
+  if (token && !store.state.userInfo.username) {
+    // 当本地 token 值存在，才请求用户信息；并且没有用户信息，为了防止登录成功后跳转路由重复请求
     store.dispatch('getUserInfoActions')
   }
   next()

@@ -11,6 +11,18 @@ export default new Vuex.Store({
     userInfo: {} // 保存用户信息
   },
   getters: {
+    // 写法一
+    // nickname(state) {
+    //   return state.userInfo.nickname
+    // }
+    // 写法二
+    // nickname: (state) => {
+    //   return state.userInfo.nickname
+    // }
+    // 写法三
+    nickname: state => state.userInfo.nickname,
+    username: state => state.userInfo.username,
+    user_pic: state => state.userInfo.user_pic
   },
   mutations: {
     // 2. 更新 token 的 mutation 函数
@@ -25,7 +37,7 @@ export default new Vuex.Store({
     // 请求 -> 用户信息
     async getUserInfoActions (store) {
       const res = await getUserInfoAPI()
-      // console.log(res.data)
+      console.log(res)
       store.commit('updateUserInfo', res.data.data)
     }
   },

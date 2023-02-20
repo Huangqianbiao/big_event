@@ -91,8 +91,14 @@ export default {
       </el-menu>
     </el-header>
     <el-container>
-      <!-- 侧边栏区域 -->
-      <el-aside width="200px">Aside</el-aside>
+      <!-- 左侧边栏的用户信息 -->
+    <el-aside width="200px">
+    <div class="user-box">
+        <img :src="user_pic" alt="" v-if="user_pic" />
+        <img src="@/assets/images/avatar.jpg" alt="" v-else />
+        <span>欢迎 {{ nickname || username }}</span>
+    </div>
+    </el-aside>
       <el-container>
         <!-- 页面主体区域 -->
         <el-main>
@@ -106,6 +112,7 @@ export default {
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 // ！！！在组件标签上绑定的所有事件(包括原生事件的名字 click, input 等等)，都是自定义事件，都需要组件内$emit来触发
 // 若组件不支持这个原生事件名字，则可用 @事件名.native = "methods 里的方法名"
 export default {
@@ -122,6 +129,7 @@ export default {
         // 确认
         // 清除 vuex
         this.$store.commit('updateToken', '')
+        this.$store.commit('updateUserInfo', {})
         // 强制跳转登录
         this.$router.push('/login')
       }).catch(() => {
@@ -129,6 +137,9 @@ export default {
       })
     }
     // 获取用户资料 -> 点击事件
+  },
+  computed: {
+    ...mapGetters(['nickname', 'username', 'user_pic'])
   }
 }
 </script>
@@ -166,5 +177,27 @@ export default {
   background-color: #fff;
   margin-right: 10px;
   object-fit: cover;
+}
+// 左侧边栏用户信息区域
+.user-box {
+  height: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top: 1px solid #000;
+  border-bottom: 1px solid #000;
+  user-select: none;
+  img {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background-color: #fff;
+    margin-right: 15px;
+    object-fit: cover;
+  }
+  span {
+    color: white;
+    font-size: 12px;
+  }
 }
 </style>
