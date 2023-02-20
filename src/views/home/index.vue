@@ -91,13 +91,76 @@ export default {
       </el-menu>
     </el-header>
     <el-container>
-      <!-- 左侧边栏的用户信息 -->
+      <!-- 左侧边栏 --- 用户信息 -->
     <el-aside width="200px">
     <div class="user-box">
         <img :src="user_pic" alt="" v-if="user_pic" />
         <img src="@/assets/images/avatar.jpg" alt="" v-else />
         <span>欢迎 {{ nickname || username }}</span>
     </div>
+    <!-- 左侧边栏 --- 菜单 -->
+    <el-menu
+      default-active="/home"
+      class="el-menu-vertical-demo"
+      @open="handleOpen"
+      @close="handleClose"
+      unique-opened
+      background-color="#23262E"
+      text-color="#fff"
+      active-text-color="#409EFF">
+      <el-menu-item index="/home">
+          <i class="el-icon-s-home"></i>
+          <span>首页</span>
+      </el-menu-item>
+      <el-submenu index="/article">
+        <template slot="title">
+          <i class="el-icon-s-order"></i>
+          <span>文章管理</span>
+        </template>
+        <el-menu-item index="/classification">
+          <i class="el-icon-s-data"></i>
+          <span>文章分类</span>
+        </el-menu-item>
+        <el-menu-item index="/list">
+          <i class="el-icon-document-copy"></i>
+          <span>文章列表</span>
+        </el-menu-item>
+        <!-- <el-menu-item-group>
+          <template slot="title">分组一</template>
+          <el-menu-item index="1-1">选项1</el-menu-item>
+          <el-menu-item index="1-2">选项2</el-menu-item>
+        </el-menu-item-group>
+        <el-menu-item-group title="分组2">
+          <el-menu-item index="1-3">选项3</el-menu-item>
+        </el-menu-item-group> -->
+      </el-submenu>
+      <el-submenu index="/user">
+        <template slot="title">
+          <i class="el-icon-user-solid"></i>
+          <span>个人中心</span>
+        </template>
+        <el-menu-item index="/user1">
+          <i class="el-icon-s-operation"></i>
+          <span>基本资料</span>
+        </el-menu-item>
+        <el-menu-item index="/user2">
+          <i class="el-icon-camera"></i>
+          <span>更换头像</span>
+        </el-menu-item>
+        <el-menu-item index="/user3">
+          <i class="el-icon-key"></i>
+          <span>重置密码</span>
+        </el-menu-item>
+        <!-- <el-menu-item-group>
+          <template slot="title">分组一</template>
+          <el-menu-item index="1-1">选项1</el-menu-item>
+          <el-menu-item index="1-2">选项2</el-menu-item>
+        </el-menu-item-group>
+        <el-menu-item-group title="分组2">
+          <el-menu-item index="1-3">选项3</el-menu-item>
+        </el-menu-item-group> -->
+      </el-submenu>
+    </el-menu>
     </el-aside>
       <el-container>
         <!-- 页面主体区域 -->
@@ -135,6 +198,12 @@ export default {
       }).catch(() => {
         // 取消
       })
+    },
+    handleOpen (key, keyPath) {
+      console.log(key, keyPath)
+    },
+    handleClose (key, keyPath) {
+      console.log(key, keyPath)
     }
     // 获取用户资料 -> 点击事件
   },
