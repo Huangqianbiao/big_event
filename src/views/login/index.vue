@@ -62,8 +62,9 @@ export default {
         this.$message.success('登录成功，正在跳转界面……')
         // 提交给 mutations 把 token 保存到 vuex 中
         this.updateToken(res.token)
+        // this.$store.commit('updateToken', res.token)
         // 4. 进入后台管理系统
-        this.$router.push('/home')
+        this.$router.push('/')
       })
     }
   }

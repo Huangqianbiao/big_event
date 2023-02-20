@@ -3,12 +3,13 @@
 </template>
 
 <script>
-// import { registerAPI } from '@/api/channel'
+// import { mapActions } from 'vuex'
 export default {
-  // async created () {
-  //   const res = await registerAPI()
-  //   console.log(res)
-  // }
+  // ...mapActions(['getUserInfoActions']),
+  created () {
+    // 调用 vuex 中 action 的方法
+    this.$store.dispatch('getUserInfoActions')
+  }
 }
 </script>
 
