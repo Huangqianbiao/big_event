@@ -1,10 +1,10 @@
 <template>
-  <div>home.vue</div>
+  <div>user-pwd</div>
 </template>
 
 <script>
 export default {
-  name: 'my-home'
+  name: 'user-pwd'
 }
 </script>
 

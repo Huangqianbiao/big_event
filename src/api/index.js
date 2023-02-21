@@ -1,6 +1,6 @@
 // 封装的是具体的接口请求方法
 // 注意: 每个方法只负责请求一个 URL 地址
-import store from '@/store'
+// import store from '@/store'
 import request from '@/utils/request'
 
 // 导出接口方法，为了在逻辑页面引入后调用
@@ -17,9 +17,6 @@ export const registerAPI = ({ username, password, repassword }) => { // ！！�
     url: '/api/reg',
     method: 'POST',
     data: {
-      // username: 'thunder',
-      // password: '111111',
-      // repassword: '111111'
       username,
       password,
       repassword
@@ -45,16 +42,29 @@ export const loginAPI = ({ username, password }) => {
 }
 
 /**
- * @param {*}
+ * 获取用户信息
  * @returns Promise 对象
  */
 export const getUserInfoAPI = () => {
   return request({
-    url: '/my/userinfo',
+    url: '/my/userinfo'
     // method 默认为 GET 方式请求
     // 传参数给后台：params(查询字符串query)，data(请求体body)，headers(请求头)
-    headers: {
-      Authorization: store.state.token
-    }
+    // headers: {
+    //   Authorization: store.state.token
+    // }
+  })
+}
+
+/**
+ * 获取侧边栏数据
+ * @returns Promise 对象
+ */
+export const getMenusListAPI = () => {
+  return request({
+    url: '/my/menus'
+    // headers: {
+    //   Authorization: store.state.token
+    // }
   })
 }
