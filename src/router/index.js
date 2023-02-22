@@ -22,32 +22,37 @@ const routes = [
     component: () => import('@/views/login')
   },
   {
-    path: '/',
-    component: () => import('@/views/layout')
-  },
-  {
-    path: '/home',
-    component: () => import('@/views/home')
-  },
-  {
-    path: '/art-cate',
-    component: () => import('@/views/article/art-cate')
-  },
-  {
-    path: '/art-list',
-    component: () => import('@/views/article/art-list')
-  },
-  {
-    path: '/user-info',
-    component: () => import('@/views/user/user-info')
-  },
-  {
-    path: '/user-avatar',
-    component: () => import('@/views/user/user-avatar')
-  },
-  {
-    path: '/user-pwd',
-    component: () => import('@/views/user/user-pwd')
+    path: '/', // 默认打开直接看到布局页
+    component: () => import('@/views/layout'),
+    redirect: '/home',
+    children: [
+    // 侧边栏导航，点击切换路由地址，路由地址靠数据请求回来铺设上去
+    // 所以路由规则要配合保持一致
+      {
+        path: 'home',
+        component: () => import('@/views/home')
+      },
+      {
+        path: 'art-cate',
+        component: () => import('@/views/article/art-cate')
+      },
+      {
+        path: 'art-list',
+        component: () => import('@/views/article/art-list')
+      },
+      {
+        path: 'user-info',
+        component: () => import('@/views/user/user-info')
+      },
+      {
+        path: 'user-avatar',
+        component: () => import('@/views/user/user-avatar')
+      },
+      {
+        path: 'user-pwd',
+        component: () => import('@/views/user/user-pwd')
+      }
+    ]
   }
 ]
 

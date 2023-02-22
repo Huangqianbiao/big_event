@@ -1,5 +1,9 @@
 <template>
-  <div>user-avatar</div>
+  <el-card class="box-card">
+    <div slot="header" class="clearfix">
+      <span>更换头像</span>
+    </div>
+  </el-card>
 </template>
 
 <script>

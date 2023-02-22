@@ -26,7 +26,8 @@ export const registerAPI = ({ username, password, repassword }) => { // ！！�
 
 /**
  * 登录接口
- * @param {*} param0 {username: 用户名, password: 密码}
+ * @param {*} param0
+ * {username: 用户名, password: 密码}
  * @returns Promise 对象
  */
 export const loginAPI = ({ username, password }) => {
@@ -66,5 +67,29 @@ export const getMenusListAPI = () => {
     // headers: {
     //   Authorization: store.state.token
     // }
+  })
+}
+
+/**
+ * 更新用户信息
+ * @param {*} param0
+ * {id: id,
+    nickname: 昵称,
+    email: 邮箱,
+    username: 用户名,
+    user_pic: 头像}
+ * @returns Promise 对象
+ */
+export const setUserInfoAPI = ({ id, nickname, email, username, user_pic }) => {
+  return request({
+    url: '/my/userinfo',
+    method: 'PUT',
+    data: {
+      id,
+      nickname,
+      email,
+      username,
+      user_pic
+    }
   })
 }

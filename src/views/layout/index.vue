@@ -1,66 +1,3 @@
-<!-- <template>
-<el-container>
-  <el-header>
-    <img src="@/assets/images/logo.png" alt="">
-    <el-menu
-  :default-active="activeIndex2"
-  class="el-menu-demo"
-  mode="horizontal"
-  @select="handleSelect"
-  background-color="#545c64"
-  text-color="#fff"
-  active-text-color="#ffd04b">
-  <el-submenu index="1">
-    <template slot="title">
-      <img src="@/assets/images/avatar.jpg" alt="">
-      <span>个人中心</span>
-    </template>
-    <el-menu-item index="2-1">基本资料</el-menu-item>
-    <el-menu-item index="2-2">更换头像</el-menu-item>
-    <el-menu-item index="2-3">重置密码</el-menu-item>
-  </el-submenu>
-</el-menu>
-</el-header>
-  <el-container>
-    <el-aside width="200px">Aside</el-aside>
-    <el-container>
-      <el-main>Main</el-main>
-    </el-container>
-  </el-container>
-</el-container>
-</template>
-
-<script>
-export default {
-  name: 'my-home'
-}
-</script>
-
-<style>
-.el-header{
-    background-color: #B3C0D1;
-    color: #333;
-    text-align: center;
-    line-height: 60px;
-  }
-
-  .el-aside {
-    background-color: #D3DCE6;
-    color: #333;
-    text-align: center;
-    line-height: 200px;
-  }
-
-  .el-main {
-    background-color: #E9EEF3;
-    color: #333;
-    text-align: center;
-    line-height: 160px;
-  }
-.el-container {
-    margin-bottom: 40px;
-  }
-</style> -->
 <template>
   <el-container class="main-container">
     <!-- 头部区域 -->
@@ -69,6 +6,8 @@ export default {
       <img src="@/assets/images/logo.png" alt="" />
       <!-- 右侧的菜单 -->
       <el-menu
+        :default-active="$route.path"
+        router
         class="el-menu-top"
         mode="horizontal"
         background-color="#23262E"
@@ -81,12 +20,13 @@ export default {
             <img src="@/assets/images/avatar.jpg" alt="" class="avatar" />
             <span>个人中心</span>
           </template>
-          <el-menu-item index="1-1"><i class="el-icon-s-operation"></i>基本资料</el-menu-item>
-          <el-menu-item index="1-2"><i class="el-icon-camera"></i>更换头像</el-menu-item>
-          <el-menu-item index="1-3"><i class="el-icon-key"></i>重置密码</el-menu-item>
+          <el-menu-item v-for="item in menus[2].children" :key="item" :index="item.indexPath" >
+            <i :class="item.icon"></i>
+          <span>{{ item.title }}</span>
+          </el-menu-item>
         </el-submenu>
         <el-menu-item index="2"><i class="el-icon-switch-button"></i>
-          <el-button type="text"  @click="quitFn">退出</el-button>
+          <el-button type="text"  @click="quitFn"><span>退出</span></el-button>
         </el-menu-item>
       </el-menu>
     </el-header>
@@ -100,7 +40,7 @@ export default {
     </div>
     <!-- 左侧边栏 --- 菜单 -->
     <el-menu
-      default-active="/home"
+      :default-active="$route.path"
       class="el-menu-vertical-demo"
       @open="handleOpen"
       @close="handleClose"
@@ -115,7 +55,7 @@ export default {
           <i :class="item.icon"></i>
           <span>{{ item.title }}</span>
       </el-menu-item>
-      <el-submenu :key="item.indexPath" :index="item.indexPath" v-else>
+      <el-submenu :key="item.indexPath1" :index="item.indexPath" v-else>
         <template slot="title">
           <i :class="item.icon"></i>
           <span>{{ item.title }}</span>
@@ -125,24 +65,6 @@ export default {
           <span>{{ subItem.title }}</span>
         </el-menu-item>
       </el-submenu>
-      <!-- <el-submenu index="/user">
-        <template slot="title">
-          <i class="el-icon-user-solid"></i>
-          <span>个人中心</span>
-        </template>
-        <el-menu-item index="/user1">
-          <i class="el-icon-s-operation"></i>
-          <span>基本资料</span>
-        </el-menu-item>
-        <el-menu-item index="/user2">
-          <i class="el-icon-camera"></i>
-          <span>更换头像</span>
-        </el-menu-item>
-        <el-menu-item index="/user3">
-          <i class="el-icon-key"></i>
-          <span>重置密码</span>
-        </el-menu-item>
-      </el-submenu> -->
       </template>
     </el-menu>
     </el-aside>
@@ -206,7 +128,7 @@ export default {
     this.getMenusListFn()
   },
   computed: {
-    ...mapGetters(['nickname', 'username', 'user_pic'])
+    ...mapGetters(['nickname', 'username', 'user_pic', 'id', 'email'])
   }
 }
 </script>

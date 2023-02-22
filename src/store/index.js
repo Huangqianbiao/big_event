@@ -23,6 +23,8 @@ export default new Vuex.Store({
     nickname: state => state.userInfo.nickname,
     username: state => state.userInfo.username,
     user_pic: state => state.userInfo.user_pic
+    // id: state => state.userInfo.id,
+    // email: state => state.userInfo.email
   },
   mutations: {
     // 2. 更新 token 的 mutation 函数
