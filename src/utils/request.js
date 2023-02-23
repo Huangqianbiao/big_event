@@ -43,7 +43,7 @@ myAxios.interceptors.response.use(function (response) {
   // 响应状态码为 2xx 或 3xx 时触发成功的回调，形参中的 response 是“成功的结果”
   return response
 }, function (error) {
-  console.log(error.response.status)
+  // console.log(error.response.status)
   // 响应状态码不是 2xx 时触发失败的回调，形参中的 error 是“失败的结果”
   if (error.response.status === 401) {
     // token 过期，清除 vuex 中的一切信息

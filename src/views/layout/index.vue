@@ -17,7 +17,7 @@
         <el-submenu index="1">
           <template slot="title">
             <!-- 头像 -->
-            <img src="@/assets/images/avatar.jpg" alt="" class="avatar" />
+            <img :src="user_pic||'@/assets/images/avatar.jpg'" alt="" class="avatar" />
             <span>个人中心</span>
           </template>
           <el-menu-item v-for="item in menus[2].children" :key="item" :index="item.indexPath" >
@@ -36,7 +36,7 @@
     <div class="user-box">
         <img :src="user_pic" alt="" v-if="user_pic" />
         <img src="@/assets/images/avatar.jpg" alt="" v-else />
-        <span>欢迎 {{ nickname || username }}</span>
+        <span>{{ nickname || username }}，欢迎你</span>
     </div>
     <!-- 左侧边栏 --- 菜单 -->
     <el-menu
@@ -128,7 +128,7 @@ export default {
     this.getMenusListFn()
   },
   computed: {
-    ...mapGetters(['nickname', 'username', 'user_pic', 'id', 'email'])
+    ...mapGetters(['nickname', 'username', 'user_pic'])
   }
 }
 </script>

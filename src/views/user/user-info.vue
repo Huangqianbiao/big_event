@@ -63,7 +63,6 @@ export default {
       // 验证表单的合法性
       this.$refs.userFormRef.validate(async valid => {
         if (valid) {
-          // this.userForm.id = this.$store.state.userInfo.id
           // 调用更新用户信息接口
           const { data: res } = await setUserInfoAPI(this.userForm)
           // 更新失败
