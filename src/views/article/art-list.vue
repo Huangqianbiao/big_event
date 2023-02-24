@@ -59,13 +59,27 @@
       </div>
 
       <!-- 文章表格区域 -->
-
+      <el-table :data="artList" style="width:100%" border stripe>
+        <el-table-column type="index" label="序号" width="100px"></el-table-column>
+        <el-table-column prop="cate_name" label="分类"></el-table-column>
+        <el-table-column prop="title" label="文章标题"></el-table-column>
+        <el-table-column prop="pub_date" label="发布时间">
+          <template v-slot="{ row }">
+            <span>{{ $formatDate(row.pub_date) }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column prop="state" label="状态"></el-table-column>
+        <el-table-column label="操作">
+          <el-button type="primary" size="mini">121</el-button>
+          <el-button type="danger" size="mini">232</el-button>
+        </el-table-column>
+      </el-table>
       <!-- 分页区域 -->
     </el-card>
   </div>
 </template>
 <script>
-import { getArticleCateAPI, pubArticleAPI } from '@/api'
+import { getArticleCateAPI, getArticleListAPI, pubArticleAPI } from '@/api'
 import defaultImage from '@/assets/images/cover.jpg'
 export default {
   name: 'art-list',
@@ -74,10 +88,14 @@ export default {
       // 查询参数对象
       q: {
         pagenum: 1,
-        pagesize: 2,
+        pagesize: 10,
         cate_id: '',
         state: ''
       },
+      // 文章列表
+      artList: [],
+      // 总数据条数
+      total: 0,
       // 文章分类
       cateList: [],
       // 发表文章数组
@@ -116,10 +134,21 @@ export default {
     showPubDialogFn () {
       this.pubDialogVisible = true
     },
+    // 初始化文章分类列表
     async initCateListFn () {
       const { data: res } = await getArticleCateAPI()
       if (res.code === 0) {
         this.cateList = res.data
+      }
+    },
+    // 初始化文章列表
+    async initArtListFn () {
+      const { data: res } = await getArticleListAPI(this.q)
+      if (res.code === 0) {
+        this.artList = res.data
+        this.total = res.total
+      } else {
+        this.$message.error(res.message)
       }
     },
     // 对话框关闭前的回调
@@ -180,6 +209,8 @@ export default {
         this.$message.success(res.message)
         // 关闭对话框
         this.pubDialogVisible = false
+        // 刷新文章列表数据
+        this.initArtListFn()
       })
     },
     // 关闭对话框后的处理函数
@@ -194,6 +225,7 @@ export default {
   },
   created () {
     this.initCateListFn()
+    this.initArtListFn()
   }
 }
 </script>
