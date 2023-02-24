@@ -188,3 +188,34 @@ export const deleteArticleAPI = (id) => {
     }
   })
 }
+
+/**
+ * 发布文章
+ * @param {*} fd 表单对象
+ * @returns Promise 对象
+ */
+export const pubArticleAPI = (fd) => {
+  return request({
+    url: '/my/article/add',
+    method: 'POST',
+    data: fd
+  })
+}
+
+/**
+ * 获取文章列表
+ * @param {*} param0
+ * { pagenum：当前页码数, pagesize：文章分类id, cate_id：文章分类id, state：文章发布状态 }
+ * @returns Promise 对象
+ */
+export const getArticleListAPI = ({ pagenum, pagesize, cate_id, state }) => {
+  return request({
+    url: '/my/article/list',
+    params: {
+      pagenum,
+      pagesize,
+      cate_id,
+      state
+    }
+  })
+}

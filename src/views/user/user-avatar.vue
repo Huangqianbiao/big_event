@@ -43,6 +43,7 @@ export default {
         this.avatar = ''
       } else {
         // 选择了图片
+        // 接口需要 base64 类型
         // 方法一：base64（字符串类型）
         // 1. 创建 FileReader 对象
         const fr = new FileReader()
