@@ -134,3 +134,57 @@ export const getArticleCateAPI = () => {
     url: '/my/cate/list'
   })
 }
+
+/**
+ * 添加文章分类
+ * @param {*} param0
+ * { cate_name: 分类名称, cate_alias: 分类别名 }
+ * @returns Promise 对象
+ */
+export const addArticleCateAPI = ({
+  cate_name,
+  cate_alias
+}) => {
+  return request({
+    url: '/my/cate/add',
+    method: 'POST',
+    data: {
+      cate_name,
+      cate_alias
+    }
+  })
+}
+
+/**
+ * 修改文章分类
+ * @param {*} param0
+ * { id: id, cate_name: 分类名称, cate_alias: 分类别名 }
+ * @returns Promise 对象
+ */
+export const updateArticleCateAPI = (id, { cate_name, cate_alias }) => {
+  return request({
+    url: '/my/cate/info',
+    method: 'PUT',
+    data: {
+      id,
+      cate_name,
+      cate_alias
+    }
+  })
+}
+
+/**
+ * 删除文章分类
+ * @param {*} param0
+ * { id: id }
+ * @returns Promise 对象
+ */
+export const deleteArticleAPI = (id) => {
+  return request({
+    url: '/my/cate/del',
+    method: 'DELETE',
+    params: {
+      id
+    }
+  })
+}
