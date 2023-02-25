@@ -93,8 +93,7 @@ export const setUserInfoAPI = ({ id, nickname, email, username, user_pic }) => {
 
 /**
  * 更新用户头像
- * @param {*} param0
- * { avatar: 头像base64字符串 }
+ * @param {*} avatar: 头像base64字符串
  * @returns Promise 对象
  */
 export const updateAvatarAPI = (avatar) => {
@@ -175,8 +174,7 @@ export const updateArticleCateAPI = (id, { cate_name, cate_alias }) => {
 
 /**
  * 删除文章分类
- * @param {*} param0
- * { id: id }
+ * @param {*} id: 文章分类id
  * @returns Promise 对象
  */
 export const deleteArticleAPI = (id) => {
@@ -205,7 +203,7 @@ export const pubArticleAPI = (fd) => {
 /**
  * 获取文章列表
  * @param {*} param0
- * { pagenum：当前页码数, pagesize：文章分类id, cate_id：文章分类id, state：文章发布状态 }
+ * { pagenum：当前页码数, pagesize：页面显示条数, cate_id：文章分类id, state：文章发布状态 }
  * @returns Promise 对象
  */
 export const getArticleListAPI = ({ pagenum, pagesize, cate_id, state }) => {
@@ -216,6 +214,30 @@ export const getArticleListAPI = ({ pagenum, pagesize, cate_id, state }) => {
       pagesize,
       cate_id,
       state
+    }
+  })
+}
+
+/**
+ * 获取文章详情
+ * @param {*} id: 文章id
+ * @returns Promise 对象
+ */
+export const getArticleDetailAPI = (id) => {
+  return request({
+    url: '/my/article/info',
+    params: {
+      id
+    }
+  })
+}
+
+export const delArticleAPI = (id) => {
+  return request({
+    url: '/my/article/info',
+    method: 'DELETE',
+    params: {
+      id
     }
   })
 }
