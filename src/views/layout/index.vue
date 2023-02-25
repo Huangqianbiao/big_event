@@ -14,7 +14,7 @@
         text-color="#fff"
         active-text-color="#409EFF"
       >
-        <el-submenu index="1">
+        <el-submenu>
           <template slot="title">
             <!-- 头像 -->
             <img :src="user_pic||'@/assets/images/avatar.jpg'" alt="" class="avatar" />
@@ -25,7 +25,7 @@
           <span>{{ item.title }}</span>
           </el-menu-item>
         </el-submenu>
-        <el-menu-item index="2"><i class="el-icon-switch-button"></i>
+        <el-menu-item><i class="el-icon-switch-button"></i>
           <el-button type="text"  @click="quitFn"><span>退出</span></el-button>
         </el-menu-item>
       </el-menu>
